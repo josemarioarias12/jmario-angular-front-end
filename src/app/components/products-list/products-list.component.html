@@ -1,0 +1,28 @@
+<div class="row products-list-container">
+  @for (item of productsList; track $index) {
+    <div class="col-12 col-md-4 products-list-item">
+      <div class="row">
+        <div class="col-12 mb-2">
+          <p class="title mb-0">{{ item.name }}</p>
+          <p class="category mb-0">{{ item.category?.name }}</p>
+        </div>
+        <div class="col-6">
+          <p class="price mb-0">${{ item.price }}</p>
+          <p class="stock mb-0">Stock: {{ item.stock }}</p>
+        </div>
+        <div class="col-6 d-flex gap-2 justify-content-end align-items-start">
+          <button type="button"
+            (click)="callEditMethod.emit(item)"
+            class="btn btn-sm btn-success">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button type="button"
+            (click)="callDeleteMethod.emit(item)"
+            class="btn btn-sm btn-danger">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
