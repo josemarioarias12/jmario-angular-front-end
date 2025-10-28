@@ -1,9 +1,17 @@
-
-<div class="contaniner h-100">
-  <div class="d-flex align-items-center justify-content-center">
-    <div class="w-100 text-center">
-      <p class="text-warning">Access denied to resource</p>
-      <a href="/app/dashboard">volver</a>
+<div class="access-denied-container">
+  <div class="d-flex align-items-center justify-content-center min-vh-100">
+    <div class="text-center">
+      <i class="fas fa-ban fa-5x text-danger mb-4"></i>
+      <h1 class="display-4 mb-3">Access Denied</h1>
+      <p class="lead text-muted mb-4">
+        You don't have permission to access this page.
+        <br>
+        This area is restricted to Super Administrators only.
+      </p>
+      <button (click)="goBack()" class="btn btn-primary btn-lg">
+        <i class="fas fa-arrow-left me-2"></i>
+        Back to Dashboard
+      </button>
     </div>
   </div>
 </div>

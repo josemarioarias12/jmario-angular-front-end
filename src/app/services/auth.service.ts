@@ -39,6 +39,10 @@ export class AuthService {
     return this.user;
   }
 
+  public getCurrentUser(): IUser {
+    return this.user;
+  }
+
   public getAccessToken(): string | null {
     return this.accessToken;
   }
@@ -72,6 +76,23 @@ export class AuthService {
 
   public isSuperAdmin(): boolean {
     return this.user.authorities ?  this.user?.authorities.some(authority => authority.authority == IRoleType.superAdmin) : false;
+  }
+
+  public isUser(): boolean {
+    return this.user.authorities ?  this.user?.authorities.some(authority => authority.authority == IRoleType.user) : false;
+  }
+
+  public getUserRole(): string | null {
+    if (this.isSuperAdmin()) {
+      return IRoleType.superAdmin;
+    }
+    if (this.isUser()) {
+      return IRoleType.user;
+    }
+    if (this.hasRole(IRoleType.admin)) {
+      return IRoleType.admin;
+    }
+    return null;
   }
 
   public hasAnyRole(roles: any[]): boolean {

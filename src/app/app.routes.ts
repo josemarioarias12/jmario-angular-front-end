@@ -202,4 +202,17 @@ export const routes: Routes = [
       }
     ],
   },
+
+{
+  path: 'users',
+  component: UsersComponent,
+  canActivate:[AdminRoleGuard],
+  data: { 
+    authorities: [
+      IRoleType.superAdmin  // SOLO SUPER_ADMIN, quitar admin y user
+    ],
+    name: 'Users',
+    showInSidebar: true
+  }
+},
 ];

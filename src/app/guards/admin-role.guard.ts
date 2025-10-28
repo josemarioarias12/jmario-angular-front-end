@@ -14,9 +14,10 @@ export class AdminRoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const hasRole = this.authService.hasRole(IRoleType.admin) || this.authService.hasRole(IRoleType.superAdmin);
+    // SOLO SUPER_ADMIN puede acceder
+    const isSuperAdmin = this.authService.hasRole(IRoleType.superAdmin);
 
-    if (!hasRole) {
+    if (!isSuperAdmin) {
       this.router.navigate(['access-denied']);
       return false;
     }

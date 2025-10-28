@@ -17,7 +17,7 @@
             <div class="mb-3">
               <h4>Sign up account</h4>
               <small style="color: #4f4f4f">
-                Enter your email & password to login
+                Enter your information to create an account
               </small>
             </div>
 
@@ -54,41 +54,66 @@
               <label for="email" class="form-label mb-2">
                 Email Address
               </label>
-              <input #email="ngModel" type="text" class="form-control" id="email" name="email"
+              <input #email="ngModel" type="email" class="form-control" id="email" name="email"
                 placeholder="agent@gmail.com" [(ngModel)]="user.email" [ngClass]="{
                   'is-invalid': email.invalid && email.touched,
                   'is-valid': email.valid && email.touched
-                }" required />
+                }" required email />
               <div *ngIf="email.invalid" class="invalid-feedback">
                 Please add a valid email
               </div>
             </div>
 
-            <div class="form-group mb-5">
+            <div class="form-group mb-3">
               <label for="password" class="form-label mb-2">Password</label>
               <div class="form-input position-relative">
                 <input #password="ngModel" type="password" class="form-control" id="password" name="password"
                 placeholder="*****" [(ngModel)]="user.password" [ngClass]="{
                   'is-invalid': password.invalid && password.touched,
                   'is-valid': password.valid && password.touched
-                }" required />
+                }" required minlength="6" />
                 <div *ngIf="password.invalid" class="invalid-feedback">
-                  Please add a valid password
+                  Please add a valid password (min 6 characters)
                 </div>
               </div>
             </div>
 
+            <div class="form-group mb-4">
+  <label for="roleId" class="form-label mb-2">Role</label>
+  <select
+    #roleId="ngModel"
+    class="form-control"
+    id="roleId"
+    name="roleId"
+    [(ngModel)]="selectedRoleId"
+    [ngClass]="{
+      'is-invalid': roleId.invalid && roleId.touched,
+      'is-valid': roleId.valid && roleId.touched
+    }"
+    required
+  >
+    @for (role of roles; track role.id) {
+      <option [value]="role.id">{{ role.label }}</option>
+    }
+  </select>
+  <div *ngIf="roleId.invalid && roleId.touched" class="invalid-feedback">
+    Please select a role
+  </div>
+</div>
+
             <div class="form-group mb-0">
-              <button class="btn btn-primary btn-block w-100" type="submit">
+              <button class="btn btn-primary btn-block w-100" type="submit" [disabled]="frm.invalid">
                 Sign up
               </button>
               @if(signUpError) {
-                <p class="text-danger">{{signUpError}}</p>
+                <p class="text-danger mt-2">{{signUpError}}</p>
               } @else if (validSignup){
-                <p class="text-success">User registered, please go to login</p>
+                <p class="text-success mt-2">User registered successfully! Redirecting to login...</p>
               }
             </div>
-            <a href="/login">Go Login</a>
+            <div class="text-center mt-3">
+              <small>Already have an account? <a routerLink="/login">Go Login</a></small>
+            </div>
           </form>
         </div>
       </div>
